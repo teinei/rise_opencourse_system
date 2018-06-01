@@ -29,8 +29,17 @@ CREATE TABLE users (
 ) ENGINE=InnoDB CHARSET=utf8;
 
 git commands
+//
+echo "# rise_opencourse_system" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/teinei/rise_opencourse_system.git
+git push -u origin master
+//
 
-
+git remote set-url origin https://teinei:gh103104@github.com/teinei/rise_opencourse_system.git
+//change github url
 
 
 

@@ -19,7 +19,7 @@ session_start();
 if(isset($_POST['month'])){
 $input_month=$_POST['month'];
 echo "input_month is : $input_month<br><br>";
-}
+
 
 $stmt = $pdo->query("
 SELECT 
@@ -90,6 +90,8 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	}
 	
 	echo"<br>";
+}
+
 }
 
 ?>
