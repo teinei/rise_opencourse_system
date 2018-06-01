@@ -2,56 +2,6 @@
 require_once "pdo.php";
 session_start();
 ?>
-
-<?php
-
-?>
-
-
-<?php
-//if(1){
-if ( isset($_POST['class_stage'])){
-	echo "loaded";
-	
-	$sql = "INSERT INTO classes ( 
-		class_stage, class_number,
-		d_teacher,co_teacher,
-		start_date,
-		open1,open2,open3,graduate_date
-	)
-    VALUES (
-		:class_stage, :class_number,
-		:d_teacher,:co_teacher,:start_date,:open1,:open2,:open3,:graduate_date
-	)";
-	$stmt = $pdo->prepare($sql);
-}
-    
-//read csv
-	$row = 1;
-if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
-  while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-    $num = count($data);///data loaded
-    echo "<p> $num fields in line $row: <br /></p>\n";
-    $row++;
-	//
-
-	//
-    for ($c=0; $c < $num; $c++) {
-        echo $c." : ".$data[$c] . "<br />\n";
-	$class_number=htmlentities($row['class_number']);
-	$d_teacher=htmlentities($row['d_teacher']);$co_teacher=htmlentities($row['co_teacher']);
-	$start_date=htmlentities($row['start_date']);
-	$open1=htmlentities($row['open1']);$open2=htmlentities($row['open2']);$open3=htmlentities($row['open3']);
-	$graduate_date=htmlentities($row['graduate_date']); 
-    }
-  }
-  fclose($handle);
-}
-//read csv
-
-
-
-?>
 <p>Add A New Class from CSV</p>
 <form method="post">
 
@@ -85,3 +35,54 @@ if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
 <p><input type="submit" value="Add New"/>
 <a href="index.php">Cancel</a></p>
 </form>
+
+<?php
+
+?>
+
+
+<?php
+//if(1){
+if ( isset($_POST['class_stage'])){
+	echo "loaded";
+	
+	$sql = "INSERT INTO classes ( 
+		class_stage, class_number,
+		d_teacher,co_teacher,
+		start_date,
+		open1,open2,open3,graduate_date
+	)
+    VALUES (
+		:class_stage, :class_number,
+		:d_teacher,:co_teacher,:start_date,:open1,:open2,:open3,:graduate_date
+	)";
+	$stmt = $pdo->prepare($sql);
+}
+    
+//read csv
+	$row = 1;
+if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
+  while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+    $num = count($data);///data loaded
+    echo "<p> $num fields in line $row: <br /></p>\n";
+    $row++;
+	//
+	echo "$data[2]<br>";
+	$class_number=htmlentities($data[1]);
+	$d_teacher=htmlentities($data[2]);$co_teacher=htmlentities($row['co_teacher']);
+	$start_date=htmlentities($row['start_date']);
+	$open1=htmlentities($row['open1']);$open2=htmlentities($row['open2']);$open3=htmlentities($row['open3']);
+	$graduate_date=htmlentities($row['graduate_date']); 
+	//
+    for ($c=0; $c < $num; $c++) {
+        echo $c." : ".$data[$c] . "<br />\n";// an item
+	
+    }
+  }
+  fclose($handle);
+}
+//read csv
+
+
+
+?>
