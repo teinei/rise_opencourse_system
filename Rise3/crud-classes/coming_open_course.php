@@ -12,6 +12,8 @@ session_start();
 <input type="text" name="month">
 </p>
 
+<p><input type="submit" value="Start Queue"/>
+
 </form>
 
 

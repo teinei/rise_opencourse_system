@@ -119,3 +119,4 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 </table>
 <a href="add.php">Add New</a>
 <a href="coming_open_course.php">coming_open_course</a>
+<a href="read_csv.php">read_csv</a>
