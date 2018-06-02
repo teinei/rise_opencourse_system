@@ -24,13 +24,13 @@ echo('<table border="1">'."\n");
 //table opened
 //alter keys and dbname here
 $stmt = $pdo->query("SELECT survey_id, 
-average, text1,text2,text3, student_name, class_number, d_teacher, co_tea, tel,open_date,ordinal FROM surveys");//
+average,q11, text1,text2,text3, student_name, class_number, d_teacher, co_tea, tel,open_date,ordinal FROM surveys");//
 // /* q1,q2,q3,q4,q5, */
 // <td> q1</td><td>q2</td><td>q3</td><td>q4</td><td>q5</td> 
 ?>
 <tr>
 <td>survey_id</td><td>class_number</td><td>student_name</td>
-<td>average</td>
+<td>average</td><td>q11</td>
 <td> text1</td><td>text2</td><td>text3</td> 
 <td>d_teacher</td> <td>co_tea</td> <td>tel</td>
 <td>open_date</td><td>ordinal</td>
@@ -78,6 +78,10 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 	echo("</td>");
 	//
 	echo("<td>");
+	echo(htmlentities($row['q11']));
+	echo("</td>");
+	//
+	echo("<td>");
 	echo(htmlentities($row['text1']));
 	echo("</td>");
 	//
@@ -117,4 +121,4 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 }
 ?>
 </table>
-<a href="add.php">Add New</a>
+<a href="add.php">Add New</a> <a href="report.php">Report</a>

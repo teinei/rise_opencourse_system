@@ -18,4 +18,12 @@ CREATE TABLE users (
    INDEX(email)
 ) ENGINE=InnoDB CHARSET=utf8;
 
+ALTER TABLE
+surveys
+ADD COLUMN
+q11	VARCHAR(128)
+AFTER
+q5
+
+
 

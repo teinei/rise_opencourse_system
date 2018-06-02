@@ -18,7 +18,9 @@ isset($_POST['survey_id'])) { //survey_id
 	student_name=:student_name, class_number=:class_number, 
 	d_teacher=:d_teacher, co_tea=:co_tea,
 	open_date=:open_date,ordinal=:ordinal,
-	average=:average
+	average=:average,
+	q11=:q11
+	
 	WHERE survey_id=:survey_id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
@@ -27,7 +29,8 @@ isset($_POST['survey_id'])) { //survey_id
 	':student_name'=>$_POST['student_name'], ':class_number'=>$_POST['class_number'], 
 	':d_teacher'=>$_POST['d_teacher'], ':co_tea'=>$_POST['co_tea'], 
 	':open_date'=>$_POST['open_date'],':ordinal'=>$_POST['ordinal'],
-	':survey_id'=>$_POST['survey_id'],':average'=>$_POST['average']
+	':survey_id'=>$_POST['survey_id'],':average'=>$_POST['average'],//i missing a comma ',' here
+	':q11'=>$_POST['q11']
     ));
     $_SESSION['success'] = 'Record updated';
     header( 'Location: index.php' ) ;
@@ -47,12 +50,16 @@ if ( $row === false ) {
 
 	$q1=htmlentities($row['q1']);$q2=htmlentities($row['q2']);
 	$q3=htmlentities($row['q3']);$q4=htmlentities($row['q4']);$q5=htmlentities($row['q5']);
+	
+	$q11=htmlentities($row['q11']);
+	
 	$text1=htmlentities($row['text1']);$text2=htmlentities($row['text2']);$text3=htmlentities($row['text3']);
 	$student_name=htmlentities($row['student_name']); $class_number=htmlentities($row['class_number']); 
 	$d_teacher=htmlentities($row['d_teacher']); $co_tea=htmlentities($row['co_tea']); 
 	$open_date=htmlentities($row['open_date']);$ordinal=htmlentities($row['ordinal']);
 	$survey_id=htmlentities($row['survey_id']);
 	$average=($row['q1']+$row['q2']+$row['q3']+$row['q4']+$row['q5'])/5.0;
+	
 
 	//$survey_id = htmlentities($row['survey_id']);
 ?>
@@ -86,6 +93,9 @@ if ( $row === false ) {
 <input type="text" name="average" value="<?= $average ?>">
 </p>
 
+<p>q11: 1.已续报 2.是，会续报 3.正在考虑 4.否，不续报
+<input type="text" name="q11" value="<?= $q11 ?>"></p>
+
 <p>text1:<br>
 <textarea rows="5" cols="50" name="text1"><?= $text1 ?></textarea></p>
 <p>text2:<br>
@@ -95,6 +105,6 @@ if ( $row === false ) {
 <input type="hidden" name="survey_id" value="<?= $survey_id ?>">
 <p>survey_id:<?= $survey_id ?></p>
 
-<p><input type="submit" value="Add New"/>
+<p><input type="submit" value="Edit done"/>
 <a href="index.php">Cancel</a></p>
 </form>

@@ -28,12 +28,17 @@ if ( isset($_POST['class_number']) && isset($_POST['student_name'])
 
     $sql = "INSERT INTO surveys ( q1,q2,q3,q4,q5,
 	text1,text2,text3, student_name, class_number, 
-	d_teacher, co_tea, open_date,ordinal)
-              VALUES ( :q1,:q2,:q3,:q4,:q5,
+	d_teacher, co_tea, open_date,ordinal
+	)VALUES ( :q1,:q2,:q3,:q4,:q5,
 			  :text1,:text2,:text3, 
 			  :student_name, :class_number,
-			  :d_teacher, :co_tea, :open_date,:ordinal)";
+			  :d_teacher, :co_tea, :open_date,:ordinal
+			  )";
     $stmt = $pdo->prepare($sql);
+	//
+	//
+	$average=($_POST['q1']+$_POST['q2']+$_POST['q3']+$_POST['q4']+$_POST['q5'])/5.0;
+	//
     $stmt->execute(array(
         ':q1' => $_POST['q1'],
 		':q2' => $_POST['q2'],
@@ -49,6 +54,7 @@ if ( isset($_POST['class_number']) && isset($_POST['student_name'])
 		':co_tea' => $_POST['co_tea'],
 		':open_date' => $_POST['open_date'],
         ':ordinal' => $_POST['ordinal']
+		//':average'=> $_POST['average'] //));
 		));
     $_SESSION['success'] = 'Record Added';
     header( 'Location: index.php' ) ;
@@ -87,6 +93,7 @@ if ( isset($_SESSION['error']) ) {
 <input type="text" name="q4"></p>
 <p>q5:
 <input type="text" name="q5"></p>
+
 
 <p>text1:<br>
 <textarea rows="5" cols="50" name="text1"></textarea></p>
