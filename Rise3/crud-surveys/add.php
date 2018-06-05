@@ -17,7 +17,7 @@ if ( isset($_POST['class_number']) && isset($_POST['student_name'])
 	
 	/*
     if ( strpos($_POST['average'],'@') === false ) {
-        $_SESSION['error'] = 'Bad data';
+        $_SESSION['error'] = 'Bad d/Applications/MAMP/htdocs/rise_opencourse_system/rise_opencourse_system/Rise3/crud-surveys/report.phpata';
         header("Location: add.php");
         return;
     }
