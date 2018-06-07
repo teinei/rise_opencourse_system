@@ -20,9 +20,14 @@ if ( isset($_SESSION['success']) ) {
     echo '<p style="color:green">'.$_SESSION['success']."</p>\n";
     unset($_SESSION['success']);
 }
-
-
-
+?>
+<a href="add.php">Add New</a> | 
+<a href="report.php">Report</a> |   
+<a href="report1-average.php">Report1 average</a> | 
+<a href="report2-suggests.php">Report2 suggests</a> | 
+<a href="report3-email.php">Report3 email</a> | 
+<br><br>
+<?php
 echo('<table border="1">'."\n");
 //table opened
 //alter keys and dbname here
@@ -124,4 +129,3 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 }
 ?>
 </table>
-<a href="add.php">Add New</a> <a href="report.php">Report</a>
