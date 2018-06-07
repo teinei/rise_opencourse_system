@@ -80,7 +80,6 @@
 		unset($_SESSION["error"]);
 	}
 ?>
-<p>demo user: Coco pw:123456</p>
 <form method="post">
 <p>account: <input type="text" name="account" value=""></p>
 <p>password: <input type="text" name="pw" value=""></p>
