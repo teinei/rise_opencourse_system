@@ -78,12 +78,10 @@ if(isset($_POST['class_number'])){
 		//echo  '$count: '."$count<br>";
 	}
 	$class_average=$class_total/$count*10;
-?>
-
-<?php
 	echo "</table>";
 	//echo 'average: '."$class_average";
 }
 
 ?>
+<a href="index.php">back</a>  
 

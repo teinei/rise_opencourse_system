@@ -83,4 +83,5 @@ if(isset($_POST['class_number'])){
 }
 
 ?>
+<a href="index.php">back</a>  
 
