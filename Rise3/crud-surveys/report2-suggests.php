@@ -22,9 +22,9 @@ if(isset($_POST['class_number'])){
 	//prepare select statement that has :placeholder
     $stmt = $pdo->prepare(" 
 	SELECT survey_id, 
-		student_name,
-		q1, q2, q3, q4, q5,
-		average
+		open_date,
+		ordinal,
+		text1, text2, text3
 	FROM
 		surveys
 	WHERE
@@ -39,9 +39,9 @@ if(isset($_POST['class_number'])){
     echo "<table border='1'>"; ?>
 	<tr>
 <td>survey_id</td>
-<td>student_name</td>
-<td>q1</td><td>q2</td><td>q3</td><td>q4</td><td>q5</td> 
-<td>average</td>
+<td>open_date</td>
+<td>ordinal</td>
+<td>text1</td><td>text2</td><td>text3</td>
 	</tr>
 	
 <?php
@@ -51,7 +51,9 @@ if(isset($_POST['class_number'])){
 	$count=0;
 	while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$row_array=array();
-		echo '$count: '."$count<br>";
+		
+		//print count before incrementing
+		//echo '$count: '."$count<br>";
 		
 		echo "<tr>";
 		$survey_id=htmlentities($row['survey_id']);
@@ -60,26 +62,27 @@ if(isset($_POST['class_number'])){
 			echo "<td>$value</td>";
 			$row_array[]=$value;
 		} 
-		echo"<br>";
+		//echo"<br>";
 		echo "</tr>";
 		
-		echo "<br>";
-		var_dump($row_array);
-		echo "<br>";
-		$class_total = $class_total+$row_array[7];
-		echo '$class_total: '."$class_total<br>";
+		//print each row
+		//echo "<br>";
+		//var_dump($row_array);
+		//echo "<br>";
+		//$class_total = $class_total+$row_array[7];
+		
+		//print score before everage
+		//echo '$class_total: '."$class_total<br>";
 		$count=$count+1;
-		echo  '$count: '."$count<br>";
+		//print $count
+		//echo  '$count: '."$count<br>";
 	}
 	$class_average=$class_total/$count*10;
 ?>
-<tr>
-<td colspan="7">class_average</td>
-<td><?=$class_average?>%</td>
-</tr>
+
 <?php
 	echo "</table>";
-	echo 'average: '."$class_average";
+	//echo 'average: '."$class_average";
 }
 
 ?>
