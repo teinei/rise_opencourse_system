@@ -51,7 +51,7 @@ if(isset($_POST['class_number'])){
 	$count=0;
 	while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$row_array=array();
-		echo '$count: '."$count<br>";
+		//echo '$count: '."$count<br>";
 		
 		echo "<tr>";
 		$survey_id=htmlentities($row['survey_id']);
@@ -60,16 +60,16 @@ if(isset($_POST['class_number'])){
 			echo "<td>$value</td>";
 			$row_array[]=$value;
 		} 
-		echo"<br>";
+		//echo"<br>";
 		echo "</tr>";
 		
-		echo "<br>";
-		var_dump($row_array);
-		echo "<br>";
+		//echo "<br>";
+		//var_dump($row_array);
+		//echo "<br>";
 		$class_total = $class_total+$row_array[7];
-		echo '$class_total: '."$class_total<br>";
+		//echo '$class_total: '."$class_total<br>";
 		$count=$count+1;
-		echo  '$count: '."$count<br>";
+		//echo  '$count: '."$count<br>";
 	}
 	$class_average=$class_total/$count*10;
 ?>
@@ -79,9 +79,9 @@ if(isset($_POST['class_number'])){
 </tr>
 <?php
 	echo "</table>";
-	echo 'average: '."$class_average";
+	echo 'average: '."$class_average".'%';
 }
 
 ?>
-<a href="index.php">back</a>  
+<br><a href="index.php">back</a>  
 

@@ -49,37 +49,47 @@ if(isset($_POST['class_number'])){
 
 	$row_average=0;
 	$count=0;
+	$q11_array=array();
+	
+	$q11s1=0;//for those choose 1
+	$q11s2=0;//choose 2
+	$q11s3=0;//choose 3 of q11
+	$q11s4=0;//choose 4
+	
 	while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$row_array=array();
-		
-		//print count before incrementing
-		//echo '$count: '."$count<br>";
 		
 		echo "<tr>";
 		$survey_id=htmlentities($row['survey_id']);
 
 		foreach($row as $value){
+			
 			echo "<td>$value</td>";
 			$row_array[]=$value;
 		} 
 		//echo"<br>";
 		echo "</tr>";
 		
-		//print each row
-		//echo "<br>";
-		//var_dump($row_array);
-		//echo "<br>";
-		//$class_total = $class_total+$row_array[7];
-		
-		//print score before everage
-		//echo '$class_total: '."$class_total<br>";
 		$count=$count+1;
-		//print $count
-		//echo  '$count: '."$count<br>";
+		//$row_array expired here,
+		$q11_array[]=$row_array[3];
+		//echo 
+		if($row_array[3] == 1){
+			$q11s1 = $q11s1+1;
+		}elseif($row_array[3] == 2){
+			$q11s2+=1;
+		}elseif($row_array[3] ==3){
+			$q11s3+=1;
+		}elseif($row_array[3] ==4){
+			$q11s4+=1;
+		}else{
+		}
 	}
 	$class_average=$class_total/$count*10;
 	echo "</table>";
-	//echo 'average: '."$class_average";
+	//var_dump($row_array);
+	//var_dump($q11_array);
+	echo "$q11s1"." "."$q11s2"." "."$q11s3"." "."$q11s4";
 }
 
 ?>
