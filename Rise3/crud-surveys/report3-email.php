@@ -3,6 +3,12 @@ require_once "pdo.php";
 session_start();
 ?>
 
+<html>
+<head>
+<meta content="text/html; charset=utf-8">
+</head>
+<body>
+
 <p>survey summary and report</p>
 <form method="post">
 <p>which class
@@ -59,16 +65,19 @@ if(isset($_POST['class_number'])){
 	while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$row_array=array();
 		
-		echo "<tr>";
 		$survey_id=htmlentities($row['survey_id']);
-
+		//echo "<tr>";
+		
 		foreach($row as $value){
-			
-			echo "<td>$value</td>";
+			if($count<1){
+				
+				echo "<td>$value</td>";
+				
+			}
 			$row_array[]=$value;
 		} 
+		//echo "</tr>";
 		//echo"<br>";
-		echo "</tr>";
 		
 		$count=$count+1;
 		//$row_array expired here,
@@ -87,11 +96,23 @@ if(isset($_POST['class_number'])){
 	}
 	$class_average=$class_total/$count*10;
 	echo "</table>";
-	//var_dump($row_array);
+	var_dump($row_array);
 	//var_dump($q11_array);
 	echo "$q11s1"." "."$q11s2"." "."$q11s3"." "."$q11s4";
 }
 
 ?>
+<br>
 <a href="index.php">back</a>  
-
+<p>
+<?= $row_array[1] ?>第<?= $row_array[2] ?>次公开课，<br>
+应出勤人数<?= $count ?>人，<br>
+实际出勤<?= $count ?>人，<br>
+<br><br>
+<?= $q11s1 ?>人已续报，<br>
+<?= $q11s2 ?>人会续报，<br>
+<?= $q11s3 ?>人正在考虑，<br>
+<?= $q11s4 ?>人不续报 <br>
+</p>
+</body>
+</html>
