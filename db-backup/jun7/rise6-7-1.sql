@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `classes` (
-  `class_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL AUTO_INCREMENT KEY,
   `class_stage` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `class_number` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `d_teacher` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `classes` (
   `open2` date DEFAULT NULL,
   `open3` date DEFAULT NULL,
   `graduate_date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `classes`

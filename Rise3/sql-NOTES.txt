@@ -36,3 +36,6 @@ DROP TABLE IF EXISTS
 openlessons,
 open_lesson_scores,
 suggests;
+
+DROP TABLE IF EXISTS
+classes;

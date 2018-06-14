@@ -41,5 +41,26 @@ git push -u origin master
 git remote set-url origin https://teinei:gh103104@github.com/teinei/rise_opencourse_system.git
 //change github url
 
+AUTO_INCREMENT KEY
+
+# delete table classes
+DROP TABLE IF EXISTS
+classes;
+
+# create table classes
+CREATE TABLE `classes` (
+  `class_id` int(11) NOT NULL AUTO_INCREMENT KEY,
+  `class_stage` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `class_number` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `d_teacher` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `co_teacher` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `open1` date DEFAULT NULL,
+  `open2` date DEFAULT NULL,
+  `open3` date DEFAULT NULL,
+  `graduate_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 

@@ -1,33 +1,38 @@
+<html>
+<head>
+<meta content="text/html; charset=utf-8">
+</head>
+<body>
 <?php
 require_once "pdo.php";
 session_start();
 //db:surveys
 //survey_id,
 
-if ( 
+if (
 isset($_POST['class_number']) && isset($_POST['student_name']) //class_number
-     && isset($_POST['ordinal']) && 	 
+     && isset($_POST['ordinal']) &&
 isset($_POST['survey_id'])) { //survey_id
 
     // Data validation should go here (see add.php)
-    $sql = "UPDATE 
+    $sql = "UPDATE
 			surveys
-			SET 
+			SET
 	q1=:q1,q2=:q2,q3=:q3,q4=:q4,q5=:q5,
 	text1=:text1,text2=:text2,text3=:text3,
-	student_name=:student_name, class_number=:class_number, 
+	student_name=:student_name, class_number=:class_number,
 	d_teacher=:d_teacher, co_tea=:co_tea,
 	open_date=:open_date,ordinal=:ordinal,
 	average=:average,
 	q11=:q11
-	
+
 	WHERE survey_id=:survey_id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
 	':q1'=> $_POST['q1'],':q2' => $_POST['q2'],':q3'=>$_POST['q3'],':q4'=>$_POST['q4'],':q5'=>$_POST['q5'],
 	':text1'=>$_POST['text1'],':text2'=>$_POST['text2'],':text3'=>$_POST['text3'],
-	':student_name'=>$_POST['student_name'], ':class_number'=>$_POST['class_number'], 
-	':d_teacher'=>$_POST['d_teacher'], ':co_tea'=>$_POST['co_tea'], 
+	':student_name'=>$_POST['student_name'], ':class_number'=>$_POST['class_number'],
+	':d_teacher'=>$_POST['d_teacher'], ':co_tea'=>$_POST['co_tea'],
 	':open_date'=>$_POST['open_date'],':ordinal'=>$_POST['ordinal'],
 	':survey_id'=>$_POST['survey_id'],':average'=>$_POST['average'],//i missing a comma ',' here
 	':q11'=>$_POST['q11']
@@ -50,16 +55,16 @@ if ( $row === false ) {
 
 	$q1=htmlentities($row['q1']);$q2=htmlentities($row['q2']);
 	$q3=htmlentities($row['q3']);$q4=htmlentities($row['q4']);$q5=htmlentities($row['q5']);
-	
+
 	$q11=htmlentities($row['q11']);
-	
+
 	$text1=htmlentities($row['text1']);$text2=htmlentities($row['text2']);$text3=htmlentities($row['text3']);
-	$student_name=htmlentities($row['student_name']); $class_number=htmlentities($row['class_number']); 
-	$d_teacher=htmlentities($row['d_teacher']); $co_tea=htmlentities($row['co_tea']); 
+	$student_name=htmlentities($row['student_name']); $class_number=htmlentities($row['class_number']);
+	$d_teacher=htmlentities($row['d_teacher']); $co_tea=htmlentities($row['co_tea']);
 	$open_date=htmlentities($row['open_date']);$ordinal=htmlentities($row['ordinal']);
 	$survey_id=htmlentities($row['survey_id']);
 	$average=($row['q1']+$row['q2']+$row['q3']+$row['q4']+$row['q5'])/5.0;
-	
+
 
 	//$survey_id = htmlentities($row['survey_id']);
 ?>
@@ -108,3 +113,5 @@ if ( $row === false ) {
 <p><input type="submit" value="Edit done"/>
 <a href="index.php">Cancel</a></p>
 </form>
+</body>
+</html>

@@ -13,33 +13,12 @@ session_start();
 if ( isset($_POST['class_stage'])){
 	echo "loaded";
 	
-	$sql = "INSERT INTO classes ( 
-		class_stage, class_number,
-		d_teacher,co_teacher,
-		start_date,
-		open1,open2,open3,graduate_date
-	)
-    VALUES (
-		:class_stage, :class_number,
-		:d_teacher,:co_teacher,:start_date,:open1,:open2,:open3,:graduate_date
-	)";
-	$stmt = $pdo->prepare($sql);
-	$stmt->execute(array(
-        ':class_stage' => $_POST['class_stage'],
-		':class_number' => $_POST['class_number'],
-		':d_teacher' => $_POST['d_teacher'],
-		':co_teacher' => $_POST['co_teacher'],
-		':start_date' => $_POST['start_date'],
-        ':open1' => $_POST['open1'],
-		':open2' => $_POST['open2'],
-		':open3' => $_POST['open3'],
-		':graduate_date' => $_POST['graduate_date']
-		));
+	
 }
     
 //read csv
 	$row = 1;
-if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
+if (($handle = fopen("open_courses-short.csv", "r")) !== FALSE) {
   while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
     $num = count($data);///data loaded
     echo "<p> $num fields in line $row: <br /></p>\n";
@@ -56,14 +35,36 @@ if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
 	echo "$class_number"."<br>";
 	$teachers=htmlentities($data[2]);
 	echo "$teachers"."<br>";
-	
+	$start_date=$data[4];
+	$open1=$data[5];
+	$open2=$data[6];
+	$open3=$data[7];
+	$graduate_date=$data[8];	
+
 	//
-	$co_teacher=htmlentities($row['co_teacher']);
-	$start_date=htmlentities($row['start_date']);
-	$open1=htmlentities($row['open1']);
-	$open2=htmlentities($row['open2']);
-	$open3=htmlentities($row['open3']);
-	$graduate_date=htmlentities($row['graduate_date']); 
+	$sql = "INSERT INTO classes ( 
+		class_stage, class_number,
+		d_teacher,co_teacher,
+		start_date,
+		open1,open2,open3,graduate_date
+	)
+    VALUES (
+		:class_stage, :class_number,
+		:d_teacher,:co_teacher,:start_date,:open1,:open2,:open3,:graduate_date
+	)";
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(array(
+        ':class_stage' => $class_number,
+		':class_number' => $class_number,
+		':d_teacher' => $teachers,
+		':co_teacher' => $teachers,
+		':start_date' => $start_date,
+        ':open1' => $open1,
+		':open2' => $open2,
+		':open3' => $open3,
+		':graduate_date' => $graduate_date
+		));
+	//
 	
   }
   fclose($handle);
