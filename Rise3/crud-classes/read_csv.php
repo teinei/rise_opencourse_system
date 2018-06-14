@@ -21,27 +21,38 @@ if ( isset($_POST['class_stage'])){
 if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
   while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
     $num = count($data);///data loaded
-    echo "<p> $num fields in line $row: <br /></p>\n";
+    //echo "<p> $num fields in line $row: <br /></p>\n";
     $row++;
-	//
-	echo "$data[2]<br>";
-	
     for ($c=0; $c < $num; $c++) {
-        echo $c." : ".$data[$c] . "<br />\n";// an item
-	
+        //echo $c." : ".$data[$c] . "<br />\n";// an item	
     }
+	//read the csv file above
+	//echo "$data[2]<br>";
 	
 	$class_number=htmlentities($data[1]);
-	echo "$class_number"."<br>";
+	//echo "$class_number"."<br>";
+	$class_stage=substr($class_number,0,2);
+	echo "$class_stage";
+	
+	//main teacher and co teacher
+	//substr(string,start,length)
 	$teachers=htmlentities($data[2]);
-	echo "$teachers"."<br>";
+	$spacepos=strpos($teachers,' ');
+	$d_teacher=substr($teachers,0,$spacepos);
+	echo "$d_teacher";
+	//echo "$spacepos";
+	$co_teacher=substr($teachers,$spacepos);
+	echo "$co_teacher";
+	
+	//echo "$teachers"."<br>";
 	$start_date=$data[4];
 	$open1=$data[5];
 	$open2=$data[6];
 	$open3=$data[7];
 	$graduate_date=$data[8];	
 
-	//
+	//insert new rows
+	/*
 	$sql = "INSERT INTO classes ( 
 		class_stage, class_number,
 		d_teacher,co_teacher,
@@ -54,16 +65,17 @@ if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
 	)";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
-        ':class_stage' => $class_number,
+        ':class_stage' => $class_stage,
 		':class_number' => $class_number,
-		':d_teacher' => $teachers,
-		':co_teacher' => $teachers,
+		':d_teacher' => $d_teacher,
+		':co_teacher' => $co_teacher,
 		':start_date' => $start_date,
         ':open1' => $open1,
 		':open2' => $open2,
 		':open3' => $open3,
 		':graduate_date' => $graduate_date
 		));
+	*/
 	//
 	
   }

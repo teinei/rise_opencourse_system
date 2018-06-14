@@ -67,7 +67,6 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	
 	$class_id=htmlentities($row['class_id']);
 	
-	
 	foreach($row as $value){
 		$type=gettype($value);//type of $value 
 		//
