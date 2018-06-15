@@ -18,7 +18,7 @@ if ( isset($_SESSION['success']) ) {
     unset($_SESSION['success']);
 }
 
-$class_counter=1;
+
 
 echo('<table border="1">'."\n");
 //table opened
@@ -27,12 +27,10 @@ $stmt = $pdo->query("SELECT class_id,
 class_stage, class_number,
 d_teacher,co_teacher,start_date,open1,open2,open3,graduate_date
 FROM classes");//
-//
 // /* q1,q2,q3,q4,q5, */
 // <td> q1</td><td>q2</td><td>q3</td><td>q4</td><td>q5</td> 
 ?>
 <tr>
-<td>class_counter</td>
 <td>class_id</td>
 <td>class stage</td><td>class number</td>
 <td>main teacher</td>
@@ -44,8 +42,6 @@ FROM classes");//
 <?php
 while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 	echo ("<tr><td>");//row start
-	echo $class_counter;
-	echo "</td><td>";
 	echo(htmlentities($row['class_id']));
 	echo("</td>");
 	//
@@ -118,12 +114,9 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     echo('<a href="edit.php?class_id='.$row['class_id'].'">Edit</a> / '); 
     echo('<a href="delete.php?class_id='.$row['class_id'].'">Delete</a>'); 
     echo("</td></tr>\n");
-    $class_counter++;
 }
 ?>
 </table>
 <a href="add.php">Add New</a>
 <a href="coming_open_course.php">coming_open_course</a>
 <a href="read_csv.php">read_csv</a>
-</body>
-</html>

@@ -17,9 +17,6 @@ if ( isset($_SESSION['success']) ) {
     echo '<p style="color:green">'.$_SESSION['success']."</p>\n";
     unset($_SESSION['success']);
 }
-
-
-
 echo('<table border="1">'."\n");
 //table opened
 //alter keys and dbname here
