@@ -21,18 +21,17 @@ if ( isset($_POST['class_stage'])){
 if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
   while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
     $num = count($data);///data loaded
-    //echo "<p> $num fields in line $row_csv: <br /></p>\n";
+    //echo "<p> $num fields in line $row: <br /></p>\n";
     $row_csv++;
     for ($c=0; $c < $num; $c++) {
         //echo $c." : ".$data[$c] . "<br />\n";// an item	
     }
 	//read the csv file above
 
-    if($row_csv!=1){
-    	/* store csv-row into different variables */
-		$class_number=htmlentities($data[1]);
-		//echo "$class_number"."<br>";
-		//get class stage, it is a letter and a digit
+    /* store csv-row into different variables */
+	$class_number=htmlentities($data[1]);
+	//echo "$class_number"."<br>";
+	//get class stage, it is a letter and a digit
 	$class_stage=substr($class_number,0,2);
 	//echo "$class_stage";
 	//main teacher and co teacher
@@ -120,9 +119,13 @@ if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
 			':graduate_date' => $graduate_date
     ));
 	}
-    }
- 	}
+//
+	
+	
 
+	
+	
+  }
   fclose($handle);
 }
 //read csv
