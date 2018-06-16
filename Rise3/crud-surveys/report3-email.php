@@ -96,7 +96,7 @@ if(isset($_POST['class_number'])){
 	}
 	$class_average=$class_total/$count*10;
 	echo "</table>";
-	var_dump($row_array);
+	//var_dump($row_array);
 	//var_dump($q11_array);
 	echo "$q11s1"." "."$q11s2"." "."$q11s3"." "."$q11s4";
 }
@@ -108,7 +108,7 @@ if(isset($_POST['class_number'])){
 <?= $row_array[1] ?>第<?= $row_array[2] ?>次公开课，<br>
 应出勤人数<?= $count ?>人，<br>
 实际出勤<?= $count ?>人，<br>
-<br><br>
+<br>
 <?= $q11s1 ?>人已续报，<br>
 <?= $q11s2 ?>人会续报，<br>
 <?= $q11s3 ?>人正在考虑，<br>
