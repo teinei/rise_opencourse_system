@@ -61,6 +61,14 @@ CREATE TABLE `classes` (
   `graduate_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-
+-- temp data
+$class_id=htmlentities($row['class_id']);
+$class_number=htmlentities($row['class_id']);
+$class_counter=0;
+$main_teacher=htmlentities($row['d_teacher']);
+$co_tea=htmlentities($row['co_teacher']);
+$start_date=htmlentities($row['start_date']);
+$open1=htmlentities($row['open1']);
+$open2=htmlentities($row['open2']);
+$open3=htmlentities($row['open3']);
+$graduate_date=htmlentities($row['graduate_date']);

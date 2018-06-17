@@ -1,7 +1,13 @@
 <?php
 require_once "pdo.php";
 session_start();
+/*
+these tables to do
+1. weekly sum by month and day,
+2. coming open course by month and day
+*/
 ?>
+
 
 <p>survey summary and report</p>
 <form method="post">
@@ -37,12 +43,7 @@ if(isset($_POST['class_number'])){
     ));
 	
     echo "<table border='1'>"; ?>
-	<tr>
-<td>survey_id</td>
-<td>student_name</td>
-<td>q1</td><td>q2</td><td>q3</td><td>q4</td><td>q5</td> 
-<td>average</td>
-	</tr>
+
 	
 <?php
 	$class_total=0;
@@ -62,11 +63,11 @@ if(isset($_POST['class_number'])){
 		$row_array=array();
 		//echo '$count: '."$count<br>";
 		
-		echo "<tr>";
+		//echo "<tr>";
 		$survey_id=htmlentities($row['survey_id']);
 
 		foreach($row as $value){
-			echo "<td>$value</td>";
+			//echo "<td>$value</td>";
 			$row_array[]=$value;
 		} 
 		$student_names[]=$row_array[1];
@@ -81,7 +82,7 @@ if(isset($_POST['class_number'])){
 		$q5[]=$row_array[6];
 		//
 		//echo"<br>";
-		echo "</tr>";
+		//echo "</tr>";
 		
 		//print row array
 		//echo "<br>";
@@ -92,6 +93,7 @@ if(isset($_POST['class_number'])){
 		$count=$count+1;
 		//echo  '$count: '."$count<br>";
 	}//end of while loop
+	/*
 	echo "<br>";
 	var_dump($student_names);
 	echo "<br>";
@@ -105,17 +107,94 @@ if(isset($_POST['class_number'])){
 	echo "<br>";
 	var_dump($q5);
 	echo "<br>";
+	*/
 	//
 	//
 	$class_average=$class_total/$count*10;
 ?>
+	<tr>
+<td>人数\项目</td>
+<?php
+	for($i=0;$i<$count;$i++){
+		$a=$i+1;
+		echo "<td align='center'>$a</td>";
+	}
+?>
+	</tr>
 <tr>
-<td colspan="7">class_average</td>
-<td><?=$class_average?>%</td>
+	<td>
+	姓名
+	</td>
+	<?php
+	foreach($student_names as $name){
+		echo "<td width='50' align='center'>$name</td>";
+	} 
+	?>
 </tr>
+<tr>
+	<td>
+	1.您对此次公开课的评价是？
+	</td>
+	<?php
+	foreach($q1 as $q){
+		echo "<td align='center'>$q</td>";
+	} 
+	?>
+</tr>
+<tr>
+	<td>
+	2.您对班级老师的授课满意度如何？
+	</td>
+	<?php
+	foreach($q2 as $q){
+		echo "<td align='center'>$q</td>";
+	} 
+	?>
+</tr>
+<tr>
+	<td>
+	3.您觉得班级老师对孩子的关爱程度如何？
+	</td>
+	<?php
+	foreach($q3 as $q){
+		echo "<td align='center'>$q</td>";
+	} 
+	?>
+</tr>
+<tr>
+	<td>
+	4.您对老师定期与您沟通孩子学习情况的满意度如何？
+	</td>
+	<?php
+	foreach($q4 as $q){
+		echo "<td align='center'>$q</td>";
+	} 
+	?>
+</tr>
+<tr>
+	<td>
+	5.您对中心整体教学服务质量的满意度如何？
+	</td>
+	<?php
+	foreach($q5 as $q){
+		echo "<td align='center'>$q</td>";
+	} 
+	//$colspan=$count-1;
+	?>
+</tr>
+<tr>
+	<td>
+	平均值
+	</td>
+	<td colspan="<?=$count?>" align="right">
+		<?=$class_average?>%
+	</td>
+</tr>
+</tr>
+
 <?php
 	echo "</table>";
-	echo 'average: '."$class_average".'%';
+	//echo 'average: '."$class_average".'%';
 }
 
 ?>
