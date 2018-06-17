@@ -41,16 +41,11 @@ if(isset($_POST['class_number'])){
         ':class_number'=>$input_class
     ));
 	
-    //echo "<table border='1'>";
-/*
-	<tr>
-		<td>survey_id</td>
-		<td>open_date</td>
-		<td>ordinal</td>
-		<td>text1</td><td>text2</td><td>text3</td>
-	</tr>
-*/
+	echo "<table border='1' width='610'>";
 ?>
+
+
+
 
 <?php
 	$class_total=0;
@@ -83,12 +78,13 @@ if(isset($_POST['class_number'])){
 		//$row_array[3]:text1
 		//$row_array[4]:text2
 		//$row_array[5]:text3
-		if($count==1){
+		if($count==1){ //only assign once 
+			//because these variables have same value every row
 			echo "<br>";
 			$open_date=$row_array[1];
-			echo "open_date: $open_date";
+			//echo "open_date: $open_date";
 			$ordinal=$row_array[2];
-			echo "<br>ordinal: $ordinal";
+			//echo "<br>ordinal: $ordinal";
 		}
 		/*
 		check if text is empty, if it is not empty
@@ -124,16 +120,46 @@ if(isset($_POST['class_number'])){
 		//print $count
 		//echo  '$count: '."$count<br>";
 	}//end of while loop
-	echo "<br>text1: $text1";
-	echo "<br>text2: $text2";
-	echo "<br>text3: $text3";
+	//echo "<br>text1: $text1";
+	//echo "<br>text2: $text2";
+	//echo "<br>text3: $text3";
 	$class_average=$class_total/$count*10;
 
 	//echo "</table>";
 	//echo 'average: '."$class_average";
+	$textlen=strlen("是");//return 3, a chiese character takes 3
+	$textlen=strlen($text2);
+	//echo "<br>$textlen";
 }
-
 ?>
+
+	<tr>
+		<td>班级名称</td>
+		<td><?= $input_class ?></td>
+	</tr>
+	<tr>
+		<td>日期</td>
+		<td><?= $open_date ?>(第<?=$ordinal?>次)</td>
+	</tr>
+	<tr>
+		<td>是否按计划进行及滞后的原因</td>
+		<td>是</td>
+	</tr>
+	<tr>
+		<td>如果正在考虑或不打算续报下一年，具体考量的点</td>
+		<td><?=$text1?></td>
+	</tr>
+	<tr>
+		<td>公开课孩子的进步点</td>
+		<td><?=$text2?></td>
+	</tr>
+	<tr>
+		<td>家长建议</td>
+		<td>
+		<?=$text3?>
+		</td>
+	</tr>
+</table>
 <br>
 <a href="index.php">back</a> 
 
