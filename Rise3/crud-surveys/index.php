@@ -26,7 +26,8 @@ if ( isset($_SESSION['success']) ) {
 <a href="report1-average.php">Report1 average</a> | 
 <a href="report2-suggests.php">Report2 suggests</a> | 
 <a href="report3-email.php">Report3 email</a> | 
-<a href="survey_sum.php">Survey Summary</a> 
+<a href="survey_sum.php">Survey Summary</a> |
+<a href="report-all-in-one.php">Report all in one</a> | 
 <br><br>
 <?php
 echo('<table border="1">'."\n");

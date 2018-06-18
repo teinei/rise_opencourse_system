@@ -20,6 +20,14 @@ if(isset($_POST['class_number'])){
     echo "class_number is set<br>";
     $input_class=$_POST['class_number'];
 	echo "input_class is : $input_class<br>";
+	$class_total=0;
+	$row_average=0;
+	$count=0;
+	$open_date=0;
+	$ordinal=0;
+	$text1='';
+	$text2='';
+	$text3='';
 //
     //    $stmt = $pdo->query("
     //  buggy code: I use query rather than prepare
@@ -45,14 +53,7 @@ if(isset($_POST['class_number'])){
 ?>
 
 <?php
-	$class_total=0;
-	$row_average=0;
-	$count=0;
-	$open_date=0;
-	$ordinal=0;
-	$text1='';
-	$text2='';
-	$text3='';
+
 	while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$row_array=array();
 		
