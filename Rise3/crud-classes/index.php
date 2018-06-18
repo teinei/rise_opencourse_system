@@ -7,7 +7,11 @@ require_once "pdo.php";
 session_start();
 ?>
 <html>
-<head></head><body>
+<head></head>
+<body>
+<a href="add.php">Add New</a> | 
+<a href="coming_open_course.php">coming_open_course</a> | 
+<a href="read_csv.php">read_csv</a>
 <?php
 if ( isset($_SESSION['error']) ) {
     echo '<p style="color:red">'.$_SESSION['error']."</p>\n";
@@ -122,8 +126,6 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 }
 ?>
 </table>
-<a href="add.php">Add New</a>
-<a href="coming_open_course.php">coming_open_course</a>
-<a href="read_csv.php">read_csv</a>
+
 </body>
 </html>

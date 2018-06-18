@@ -200,3 +200,44 @@ if(isset($_POST['class_number'])){
 ?>
 <br><a href="index.php">back</a>  
 
+<?php
+//put sum data into survey_sum db
+$stmt = $pdo->prepare("SELECT * FROM 
+		survey_sum WHERE class_name = :xyz");
+	$stmt->execute(array(":xyz" => $input_class));
+	$row_pdo = $stmt->fetch(PDO::FETCH_ASSOC);
+	//if it is not exist, add new entry to db
+	
+	if ( $row_pdo === false &&
+	isset($_POST['class_number'])
+	){
+		echo "<br>insert data";
+		$sql = "INSERT INTO survey_sum ( 
+		average
+			)VALUES ( 
+		:average
+			)";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute(array(
+			':average' => $class_average
+		));
+	}elseif($row_pdo!=false){
+		//entry exist
+		echo "<br>update data<br>";
+		//update db
+		$sql = "UPDATE
+			survey_sum 
+		SET 
+			average=:average
+		WHERE
+		class_name=:class_name";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute(array(
+			':average' => $class_average,
+			':class_name' => $input_class
+			));
+	}else{
+		//
+		echo "bada data";
+	}
+?>

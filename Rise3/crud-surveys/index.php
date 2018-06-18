@@ -26,13 +26,16 @@ if ( isset($_SESSION['success']) ) {
 <a href="report1-average.php">Report1 average</a> | 
 <a href="report2-suggests.php">Report2 suggests</a> | 
 <a href="report3-email.php">Report3 email</a> | 
+<a href="survey_sum.php">Survey Summary</a> 
 <br><br>
 <?php
 echo('<table border="1">'."\n");
 //table opened
 //alter keys and dbname here
 $stmt = $pdo->query("SELECT survey_id,
-average,q11, text1,text2,text3, student_name, class_number, d_teacher, co_tea, tel,open_date,ordinal FROM surveys");//
+average,q11, text1,text2,text3, 
+student_name, class_number, d_teacher, co_tea, tel,open_date,ordinal 
+FROM surveys");//
 // /* q1,q2,q3,q4,q5, */
 // <td> q1</td><td>q2</td><td>q3</td><td>q4</td><td>q5</td>
 ?>
