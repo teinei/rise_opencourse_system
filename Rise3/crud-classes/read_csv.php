@@ -7,7 +7,7 @@ session_start();
 <meta content="text/html; charset=utf-8">
 </head>
 <body>
-
+<p><a href="index.php">Back</a></p>
 <?php
 //if(1){
 if ( isset($_POST['class_stage'])){
@@ -18,7 +18,7 @@ if ( isset($_POST['class_stage'])){
     
 //read csv
 	$row_csv = 1;
-if (($handle = fopen("open_courses.csv", "r")) !== FALSE) {
+if (($handle = fopen("jun19..24.ivy.csv", "r")) !== FALSE) {
   while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
     $num = count($data);///data loaded
     //echo "<p> $num fields in line $row_csv: <br /></p>\n";
