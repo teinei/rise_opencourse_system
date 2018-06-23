@@ -113,6 +113,14 @@ if(isset($_POST['class_number'])){
 		//echo  '$count: '."$count<br>";
 	}//end of while loop
 	$class_average=$class_total/$count*10;
+	$class_average=number_format($class_average,2);
+	/*
+	//
+	$number = 1234.5678;
+	// english notation without thousands seperator
+	$english_format_number = number_format($number, 2, '.', '');
+	// 1234.57
+	*/
 ?>
 	<br><br>
 	<hr>
@@ -194,6 +202,7 @@ if(isset($_POST['class_number'])){
 	平均值
 	</td>
 	<td colspan="<?=$count?>" align="right">
+		<?php sprintf("%.2f",$class_average) ?>
 		<?=$class_average?>%
 	</td>
 </tr>

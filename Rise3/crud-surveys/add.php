@@ -3,6 +3,8 @@
 //columns: average, student_name
 require_once "pdo.php";
 session_start();
+$average;
+//$average=($_POST['q1']+$_POST['q2']+$_POST['q3']+$_POST['q4']+$_POST['q5'])/5.0;
 
 if ( isset($_POST['class_number']) && isset($_POST['student_name'])
      && isset($_POST['d_teacher'])) {
@@ -25,19 +27,28 @@ if ( isset($_POST['class_number']) && isset($_POST['student_name'])
 	/*
 	survey_id, q1,q2,q3,q4,q5, average, text1,text2,text3, student_name, class_number, d_teacher, co_tea, tel,open_date,ordinal
 	*/
-
-    $sql = "INSERT INTO surveys ( q1,q2,q3,q4,q5,
-	text1,text2,text3, student_name, class_number, 
-	d_teacher, co_tea, open_date,ordinal
+	//
+	$average=($_POST['q1']+$_POST['q2']+$_POST['q3']+$_POST['q4']+$_POST['q5'])/5.0;
+	//
+    $sql = "INSERT INTO surveys ( 
+	q1,q2,q3,q4,q5,
+	text1,text2,text3, 
+	student_name, class_number, 
+	d_teacher, co_tea, 
+	open_date,ordinal,
+	q11, average
 	)VALUES ( :q1,:q2,:q3,:q4,:q5,
 			  :text1,:text2,:text3, 
 			  :student_name, :class_number,
-			  :d_teacher, :co_tea, :open_date,:ordinal
+			  :d_teacher, :co_tea, 
+			  :open_date,:ordinal,
+			  :q11,
+			  :average
 			  )";
     $stmt = $pdo->prepare($sql);
 	//
 	//
-	$average=($_POST['q1']+$_POST['q2']+$_POST['q3']+$_POST['q4']+$_POST['q5'])/5.0;
+	
 	//
     $stmt->execute(array(
         ':q1' => $_POST['q1'],
@@ -53,9 +64,10 @@ if ( isset($_POST['class_number']) && isset($_POST['student_name'])
 		':d_teacher' => $_POST['d_teacher'],
 		':co_tea' => $_POST['co_tea'],
 		':open_date' => $_POST['open_date'],
-        ':ordinal' => $_POST['ordinal']
-		//':average'=> $_POST['average'] //));
-		));
+        ':ordinal' => $_POST['ordinal'],
+		':q11'=>$_POST['q11'],
+		':average' => $average ));
+		//$_POST['average'], I miss a comma after ordinal post $_POST['ordinal'],
     $_SESSION['success'] = 'Record Added';
     header( 'Location: index.php' ) ;
     return;
@@ -93,6 +105,9 @@ if ( isset($_SESSION['error']) ) {
 <input type="text" name="q4"></p>
 <p>q5:
 <input type="text" name="q5"></p>
+
+<p>q11: 1.已续报 2.是，会续报 3.正在考虑 4.否，不续报
+<input type="text" name="q11" value="<?= $q11 ?>"></p>
 
 
 <p>text1:<br>
