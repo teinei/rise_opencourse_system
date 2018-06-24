@@ -9,6 +9,11 @@ session_start();
 <html>
 <head></head>
 <body>
+<form method="post">
+<p>which class
+<input type="text" name="class_number">
+<input type="submit" value="Start Queue"/>
+</form>
 <a href="add.php">Add New</a> | 
 <a href="coming_open_course.php">coming_open_course</a> | 
 <a href="read_csv.php">read_csv</a>
