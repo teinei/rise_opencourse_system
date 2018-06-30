@@ -5,17 +5,37 @@ session_start();
 //
 $red_date=0;
 //
-$input_begin_day=1;
-$input_begin_month=1;
 $input_begin_year=2017;
+$input_begin_month=1;
+$input_begin_day=1;
+//
+$input_end_year=2020;
+$input_end_month=1;
+$input_end_day=1;
+//
+if(isset($_POST['begin_year'])){
+	$input_begin_year=$_POST['begin_year'];
+}
+if(isset($_POST['begin_month'])){
+	$input_begin_month=$_POST['begin_month'];
+}
+if(isset($_POST['begin_day'])){
+	$input_begin_day=$_POST['begin_day'];
+}
 //
 $input_begin_date=$input_begin_year."-".
 	$input_begin_month."-".$input_begin_day;
 //echo "$input_begin_date";
 //
-$input_end_day=1;
-$input_end_month=1;
-$input_end_year=2020;
+if(isset($_POST['end_year'])){
+	$input_end_year=$_POST['end_year'];
+}
+if(isset($_POST['end_month'])){
+	$input_end_month=$_POST['end_month'];
+}
+if(isset($_POST['end_day'])){
+	$input_end_day=$_POST['end_day'];
+}
 //
 $input_end_date=$input_end_year."-".
 	$input_end_month."-".$input_end_day;
@@ -132,10 +152,20 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	$text2=$row['text2'];
 	$text3=$row['text3'];
 	//
-	//echo "open_date: $open_date";
-	$date_flag=
-		$open_date>=$input_begin_date && $open_date<=$input_end_date;
-	//var_dump($date_flag);
+	echo "open_date: $open_date<br>";
+	$begin_flag=$open_date<=$input_begin_date;
+	echo "$open_date<=$input_begin_date".":"."$begin_flag<br>";
+	//echo "$begin_flag";
+	$end_flag=$open_date>=$input_end_date;
+	echo "$open_date>=$input_end_date".":"."$end_flag<br>";
+	var_dump($end_flag);
+	echo "$end_flag";
+	$date_flag=$begin_flag && $end_flag;
+	echo "";
+	echo "";
+	//echo '$open_date>=$input_begin_date || $open_date<=$input_end_date:';
+	var_dump($date_flag);
+	echo "$date_flag<br>";
 	//
 	if($date_flag){
 		//

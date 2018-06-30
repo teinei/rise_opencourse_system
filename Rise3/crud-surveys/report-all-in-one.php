@@ -130,10 +130,33 @@ if(isset($_POST['class_number'])){
 	<tr>
 	<td>人数\项目</td>
 <?php
+	//
+if(isset($_POST['class_number'])){
+	$filename = "average_".date('Ymd').'_'.date('h-i-sa').'.csv'; //设置文件名
+	$file = fopen("$filename","w");
+	$csv_count=array();
 	for($i=0;$i<$count;$i++){
 		$a=$i+1;
 		echo "<td align='center'>$a</td>";
+		//
+		if($a<$count)$csv_count[].=$a.",";
+		else $csv_count[].=$a;
+		//
+
 	}
+//$csv_count .= implode(",",$count)."\n";
+//echo sizeof($count);//sizeof() to calculate array length
+echo"<br>";
+//var_dump($csv_count);
+//fputcsv($file,$csv_count); 
+//fclose($file);    
+    //header("Content-type:text/csv"); 
+    //header("Content-Disposition:attachment;filename=".$filename); 
+    //header('Cache-Control:must-revalidate,post-check=0,pre-check=0'); 
+    //header('Expires:0'); 
+    //header('Pragma:public'); 
+    //echo $csv_count;
+}
 ?>
 	</tr>
 <tr>
@@ -465,4 +488,5 @@ if ( $row_pdo === false &&
 	//
 	echo '<p style="color:red">'."bada data".'</p>';
 }
+echo "<br><br>$input_class"."第"."$ordinal"."次公开课-"."$open_date"."-"."$main_teacher"."-"."$co_teacher<br><br><br>";
 ?>
