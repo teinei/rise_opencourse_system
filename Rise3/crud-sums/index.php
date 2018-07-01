@@ -115,7 +115,7 @@ $text3=0;
 	</p>
 	<p><input type="submit" value="Start Queue"/>
 </form>
-<table border="1" width="850">
+<table border="1" width="">
 	<tr>
 	<td>sum_id</td>
 	<td>class_name</td>
@@ -152,22 +152,23 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	$text2=$row['text2'];
 	$text3=$row['text3'];
 	//
-	echo "open_date: $open_date<br>";
-	$begin_flag=$open_date<=$input_begin_date;
-	echo "$open_date<=$input_begin_date".":"."$begin_flag<br>";
+	//echo "open_date: $open_date<br>";
+	//$begin_flag=($open_date>=$input_begin_date);
+	//echo "$open_date<=$input_begin_date".":"."$begin_flag<br>";
 	//echo "$begin_flag";
-	$end_flag=$open_date>=$input_end_date;
-	echo "$open_date>=$input_end_date".":"."$end_flag<br>";
-	var_dump($end_flag);
-	echo "$end_flag";
-	$date_flag=$begin_flag && $end_flag;
-	echo "";
-	echo "";
+	//$end_flag=$open_date>=$input_end_date;
+	//echo "$open_date>=$input_end_date".":"."$end_flag<br>";
+	//var_dump($end_flag);
+	//echo "$end_flag";
+	//$date_flag=$begin_flag && $end_flag;
+	//echo "";
+	//echo "";
 	//echo '$open_date>=$input_begin_date || $open_date<=$input_end_date:';
-	var_dump($date_flag);
-	echo "$date_flag<br>";
+	//var_dump($date_flag);
+	//echo "$date_flag<br>";
 	//
-	if($date_flag){
+	//if($date_flag){
+	if(1){
 		//
 		echo ("<tr><td>");//row start
 		echo "$sum_id";
