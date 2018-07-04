@@ -12,5 +12,11 @@ tech used:
 php function,
 pdo sql, prepare, execute-array 3 steps
 mysql where and
+-------
+next step
+object oriented php
+https://www.tutorialspoint.com/php/php_object_oriented.htm
+export table to csv
+https://stackoverflow.com/questions/10498632/converting-html-table-to-a-csv-automatically-using-php
 */
 ?>
