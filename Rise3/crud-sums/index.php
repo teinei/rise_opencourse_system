@@ -115,61 +115,67 @@ $text3=0;
 	</p>
 	<p><input type="submit" value="Start Queue"/>
 </form>
-<table border="1" width="">
-	<tr>
-	<td>sum_id</td>
-	<td>class_name</td>
-	<td>open_date</td>
-	<td>main_teacher</td> <td>co_teacher</td> 
-	<td>average</td>
-	<td> text1</td><td>text2</td><td>text3</td>
-	<td></td>
-	</tr>
+
 <?php
-$stmt = $pdo->query("SELECT 
-	sum_id,
-	open_date,
-	class_name,
-	main_teacher,co_teacher,
-	average,
-	text1,text2,text3
+function survey_sums_by_date($input_begin_d,$input_end_d){
+	require "pdo.php";
+	//
+	/*
+	$sql = "UPDATE `user` SET `password`=:password WHERE `user_id`=:userId";  
+	$stmt = $dbh->prepare($sql);  
+	$stmt->execute(array(':userId'=>'7', ':password'=>'4607e782c4d86fd5364d7e4508bb10d9'));  
+	echo $stmt->rowCount();
+	*/
+	$sql="SELECT 
+		sum_id,
+		open_date,
+		class_name,
+		main_teacher,co_teacher,
+		average,
+		text1,text2,text3
 	FROM
-	survey_sum
-");
-while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-	//echo "<br>";
-	//var_dump($row);
-	//	
-	$sum_id=htmlentities($row['sum_id']);
+		survey_sum
+	WHERE 
+		survey_sum.open_date <= :input_end_date 
+	AND
+		survey_sum.open_date >= :input_begin_date
+	";
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(array(
+		':input_begin_date' => $input_begin_d,
+		':input_end_date' => $input_end_d
+	));
 	//
-	$open_date=$row['open_date'];
-	//
-	$class_name=$row['class_name'];
-	$main_teacher=$row['main_teacher'];
-	$co_teacher=$row['co_teacher'];
-	$average=$row['average'];
-	$text1=$row['text1'];
-	$text2=$row['text2'];
-	$text3=$row['text3'];
-	//
-	//echo "open_date: $open_date<br>";
-	//$begin_flag=($open_date>=$input_begin_date);
-	//echo "$open_date<=$input_begin_date".":"."$begin_flag<br>";
-	//echo "$begin_flag";
-	//$end_flag=$open_date>=$input_end_date;
-	//echo "$open_date>=$input_end_date".":"."$end_flag<br>";
-	//var_dump($end_flag);
-	//echo "$end_flag";
-	//$date_flag=$begin_flag && $end_flag;
-	//echo "";
-	//echo "";
-	//echo '$open_date>=$input_begin_date || $open_date<=$input_end_date:';
-	//var_dump($date_flag);
-	//echo "$date_flag<br>";
-	//
-	//if($date_flag){
-	if(1){
+
+	//table header open
+	echo "<table border='1'>";
+	echo "<tr>";
+	echo "<td>sum_id</td>";
+	echo "<td>class_name</td>";
+	echo "<td>open_date</td>";
+	echo "<td>main_teacher</td> <td>co_teacher</td>";
+	echo "<td>average</td>";
+	echo "<td> text1</td><td>text2</td><td>text3</td>";
+	echo "<td></td>";
+	echo "</tr>";
+	//table header close
+	
+	while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		//echo "<br>";
+		//var_dump($row);
+		//	
+		$sum_id=htmlentities($row['sum_id']);
 		//
+		$open_date=$row['open_date'];
+		//
+		$class_name=$row['class_name'];
+		$main_teacher=$row['main_teacher'];
+		$co_teacher=$row['co_teacher'];
+		$average=$row['average'];
+		$text1=$row['text1'];
+		$text2=$row['text2'];
+		$text3=$row['text3'];
+
 		echo ("<tr><td>");//row start
 		echo "$sum_id";
 		echo("</td>");
@@ -177,7 +183,7 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		echo("<td>");
 		echo "$class_name";//alter key name
 		echo("</td>");
-		//
+			//
 		echo("<td>");
 		echo "$open_date";//alter key name
 		echo("</td>");
@@ -189,7 +195,7 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		echo("<td>");
 		echo "$co_teacher";
 		echo("</td>");
-		//
+	//
 		echo("<td>");
 		echo "$average";
 		echo("</td>");
@@ -197,21 +203,51 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		echo("<td>");
 		echo "$text1";
 		echo("</td>");
-		
+	
 		echo("<td>");
 		echo "$text2";
 		echo("</td>");
-		//
+	//
 		echo("<td>");
 		echo "$text3";
 		echo("</td>");
-	
+
 		echo("<td>");
 		echo('<a href="edit.php?sum_id='.$sum_id.'">Edit</a> / ');
 		echo('<a href="delete.php?sum_id='.$sum_id.'">Delete</a>');
-		echo("</td></tr>\n");
+		echo("</td></tr>\n");	
 	}
+	echo "</table>";
+	//
+	//$begin_flag=($open_date>=$input_begin_date);
+	//$end_flag=$open_date>=$input_end_date;
+	//$date_flag=$begin_flag && $end_flag;
 	//
 }
+
+//
+survey_sums_by_date($input_begin_date,$input_end_date);
+echo "<br><br><br>";
+
+//
+$stmt = $pdo->query("SELECT 
+	sum_id,
+	open_date,
+	class_name,
+	main_teacher,co_teacher,
+	average,
+	text1,text2,text3
+	FROM
+	survey_sum
+");
 ?>
-</table>
+<table border="1" width="">
+	<tr>
+	<td>sum_id</td>
+	<td>class_name</td>
+	<td>open_date</td>
+	<td>main_teacher</td> <td>co_teacher</td> 
+	<td>average</td>
+	<td> text1</td><td>text2</td><td>text3</td>
+	<td></td>
+	</tr>

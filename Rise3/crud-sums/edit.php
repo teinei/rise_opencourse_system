@@ -32,11 +32,11 @@ isset($_POST['sum_id'])
 			average=:average
 		WHERE
 		sum_id=:sum_id";
-		$stmt = $pdo->prepare($sql);
-		$stmt->execute(array(
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(array(
 			':average' => $class_average,
 			':sum_id' => $input_class
-			));
+	));
     //
     $_SESSION['success'] = 'Record updated';
     header( 'Location: index.php' ) ;
