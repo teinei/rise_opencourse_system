@@ -241,13 +241,3 @@ $stmt = $pdo->query("SELECT
 	survey_sum
 ");
 ?>
-<table border="1" width="">
-	<tr>
-	<td>sum_id</td>
-	<td>class_name</td>
-	<td>open_date</td>
-	<td>main_teacher</td> <td>co_teacher</td> 
-	<td>average</td>
-	<td> text1</td><td>text2</td><td>text3</td>
-	<td></td>
-	</tr>
