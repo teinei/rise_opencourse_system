@@ -1,10 +1,7 @@
 <?php
 require_once "pdo.php";
 session_start();
-//
-//
-$red_date=0;
-//
+
 $input_begin_year=2017;
 $input_begin_month=1;
 $input_begin_day=1;
@@ -12,7 +9,8 @@ $input_begin_day=1;
 $input_end_year=2020;
 $input_end_month=1;
 $input_end_day=1;
-//
+
+//input begin date setter
 if(isset($_POST['begin_year'])){
 	$input_begin_year=$_POST['begin_year'];
 }
@@ -22,11 +20,12 @@ if(isset($_POST['begin_month'])){
 if(isset($_POST['begin_day'])){
 	$input_begin_day=$_POST['begin_day'];
 }
-//
 $input_begin_date=$input_begin_year."-".
 	$input_begin_month."-".$input_begin_day;
 //echo "$input_begin_date";
-//
+//input begin date setter fin
+
+//input end date setter by post form
 if(isset($_POST['end_year'])){
 	$input_end_year=$_POST['end_year'];
 }
@@ -36,11 +35,11 @@ if(isset($_POST['end_month'])){
 if(isset($_POST['end_day'])){
 	$input_end_day=$_POST['end_day'];
 }
-//
 $input_end_date=$input_end_year."-".
 	$input_end_month."-".$input_end_day;
-//
-//
+//input end date setter by post form closed
+
+//db column variables
 $sum_id=0;
 $open_date=0;
 $class_name=0;
@@ -50,6 +49,7 @@ $average=0;
 $text1=0;
 $text2=0;
 $text3=0;
+//db column variables
 ?>
 <html>
 <head>
@@ -117,7 +117,7 @@ $text3=0;
 </form>
 
 <?php
-function survey_sums_by_date($input_begin_d,$input_end_d){
+function survey_sums_by_date($input_begin_date_arg,$input_end_date_arg){
 	require "pdo.php";
 	//
 	/*
@@ -142,8 +142,8 @@ function survey_sums_by_date($input_begin_d,$input_end_d){
 	";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(array(
-		':input_begin_date' => $input_begin_d,
-		':input_end_date' => $input_end_d
+		':input_begin_date' => $input_begin_date_arg,
+		':input_end_date' => $input_end_date_arg
 	));
 	//
 
@@ -219,25 +219,10 @@ function survey_sums_by_date($input_begin_d,$input_end_d){
 	}
 	echo "</table>";
 	//
-	//$begin_flag=($open_date>=$input_begin_date);
-	//$end_flag=$open_date>=$input_end_date;
-	//$date_flag=$begin_flag && $end_flag;
 	//
 }
 
 //
 survey_sums_by_date($input_begin_date,$input_end_date);
 echo "<br><br><br>";
-
-//
-$stmt = $pdo->query("SELECT 
-	sum_id,
-	open_date,
-	class_name,
-	main_teacher,co_teacher,
-	average,
-	text1,text2,text3
-	FROM
-	survey_sum
-");
 ?>
